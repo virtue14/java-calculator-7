@@ -8,11 +8,11 @@ public class Application {
         String input = Console.readLine();
 
         int result = add(input);
-        System.out.print("결과: " + result);
+        System.out.println("결과: " + result);
     }
 
     public static int add(String input) {
-        if (input.isEmpty()) {
+        if (input == null || input.isEmpty()) {
             return 0;
         }
 
