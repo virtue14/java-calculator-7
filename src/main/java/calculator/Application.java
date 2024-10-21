@@ -12,7 +12,7 @@ public class Application {
 
         try {
             int result = add(input);
-            System.out.print("결과: " + result);
+            System.out.println("결과: " + result);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -41,7 +41,13 @@ public class Application {
         int sum = 0;
 
         for (String token : tokens) {
-            int number = toInt(token);
+            int number;
+            try {
+                number = toInt(token);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다: " + token);
+            }
+
             if (number < 0) {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
             }
