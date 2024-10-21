@@ -7,11 +7,15 @@ import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("덧셈할 문자열을 입력해 주세요: ");
+        System.out.print("덧셈할 문자열을 입력해 주세요: ");
         String input = Console.readLine();
 
-        int result = add(input);
-        System.out.println("결과: " + result);
+        try {
+            int result = add(input);
+            System.out.print("결과: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static int add(String input) {
@@ -37,7 +41,11 @@ public class Application {
         int sum = 0;
 
         for (String token : tokens) {
-            sum += toInt(token);
+            int number = toInt(token);
+            if (number < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다: " + number);
+            }
+            sum += number;
         }
 
         return sum;
